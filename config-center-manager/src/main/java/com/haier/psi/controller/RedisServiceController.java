@@ -142,10 +142,7 @@ public class RedisServiceController {
             if(msg==null) break;
                 pw.write(msg);
                 pw.flush();
-
-
         }
-
       }catch (Exception e){
         e.printStackTrace();
       }
