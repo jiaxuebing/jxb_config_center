@@ -5,7 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
   <modules>
-    <module>config-center-manager</module>
+    <module>spring-discom-common</module>
+    <module>spring-data-worker</module>
+    <module>spring-mq-service</module>
+    <module>spring-search-service</module>
+    <module>spring-data-web</module>
   </modules>
 
   <parent>
@@ -14,11 +18,11 @@
     <version>2.1.7.RELEASE</version>
   </parent>
 
-  <groupId>com.haier.psi</groupId>
-  <artifactId>jxb_config_center</artifactId>
+  <groupId>com.jxb.demo</groupId>
+  <artifactId>spring-demo</artifactId>
   <version>1.0</version>
 
-  <name>jxb_config_center</name>
+  <name>spring-demo</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -29,16 +33,17 @@
     <zookeeper.version>3.4.14</zookeeper.version>
     <config.center.common.version>1.0</config.center.common.version>
     <fastjson.version>1.2.62</fastjson.version>
-    <config.center.client.version>1.0</config.center.client.version>
+    <curator.version>2.13.0</curator.version>
     <cglib.version>3.3.0</cglib.version>
     <jedis.version>2.10.2</jedis.version>
     <canal.client.version>1.1.4</canal.client.version>
     <mysql.version>5.1.48</mysql.version>
-    <mybatis.version>2.1.1</mybatis.version>
     <druid.version>1.1.21</druid.version>
     <elasticsearch.version>6.8.0</elasticsearch.version>
     <mybatis.version>3.3.0</mybatis.version>
     <druid.boot.version>1.1.22</druid.boot.version>
+    <httpclient.version>4.5.11</httpclient.version>
+    <javassist.version>3.27.0-GA</javassist.version>
   </properties>
 
   <dependencyManagement>
@@ -49,23 +54,29 @@
       <artifactId>zookeeper</artifactId>
       <version>${zookeeper.version}</version>
     </dependency>
+    <!--zookeeper curator-->
+    <dependency>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-framework</artifactId>
+      <version>${curator.version}</version>
+    </dependency>
 
     <dependency>
-      <groupId>com.haier.psi</groupId>
-      <artifactId>config-center-common</artifactId>
-      <version>${config.center.common.version}</version>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-recipes</artifactId>
+      <version>${curator.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-client</artifactId>
+      <version>${curator.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>${fastjson.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.haier.psi</groupId>
-      <artifactId>config-center-client</artifactId>
-      <version>${config.center.client.version}</version>
     </dependency>
 
     <dependency>
@@ -130,6 +141,18 @@
       <groupId>org.elasticsearch.client</groupId>
       <artifactId>elasticsearch-rest-high-level-client</artifactId>
       <version>${elasticsearch.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
+    </dependency>
+
+    <!--javassist 依赖-->
+    <dependency>
+      <groupId>org.javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>${javassist.version}</version>
     </dependency>
 
 
