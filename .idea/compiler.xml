@@ -6,20 +6,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="config-center-client" />
-        <module name="config-center-common" />
-        <module name="config-center-manager" />
-        <module name="config-center-server" />
+        <module name="spring-data-web" />
+        <module name="spring-data-worker" />
+        <module name="spring-discom-common" />
+        <module name="spring-dubbo-provider" />
+        <module name="spring-dubbo-provider-api" />
+        <module name="spring-mq-service" />
+        <module name="spring-mqtt-service" />
+        <module name="spring-search-service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="config-center-client" options="-parameters" />
-      <module name="config-center-common" options="-parameters" />
-      <module name="config-center-manager" options="-parameters" />
-      <module name="config-center-server" options="-parameters" />
-      <module name="jxb_config_center" options="-parameters" />
+      <module name="spring-data-web" options="-parameters" />
+      <module name="spring-data-worker" options="-parameters" />
+      <module name="spring-discom-common" options="-parameters" />
+      <module name="spring-dubbo-provider" options="-parameters" />
+      <module name="spring-dubbo-provider-api" options="-parameters" />
+      <module name="spring-mq-service" options="-parameters" />
+      <module name="spring-mqtt-service" options="-parameters" />
+      <module name="spring-search-service" options="-parameters" />
+      <module name="spring_work_demo" options="-parameters" />
     </option>
   </component>
 </project>

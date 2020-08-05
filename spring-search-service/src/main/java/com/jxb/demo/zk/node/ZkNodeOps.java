@@ -2,7 +2,6 @@ package com.jxb.demo.zk.node;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.ZooDefs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
@@ -28,25 +27,27 @@ public class ZkNodeOps {
      * @param persistFlag true 持久 false 临时
      * @param seqFlag true 带序号 false 不带序号
      */
-    public void createNode(String nodePath,boolean persistFlag,boolean seqFlag) throws Exception{
+    public String createNode(String nodePath,boolean persistFlag,boolean seqFlag) throws Exception{
         logger.info("********[ZkNodeOps::createNode]===>>>start********");
+        String node = null;
         if(persistFlag){//如果是持久节点
             if(seqFlag){//如果是带序号
-                client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT_SEQUENTIAL).forPath(nodePath);
+               node = client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT_SEQUENTIAL).forPath(nodePath);
 
             }else{//不带序号
-                client.create().creatingParentsIfNeeded().forPath(nodePath,"jxb".getBytes());
+               node = client.create().creatingParentsIfNeeded().forPath(nodePath);
 
             }
         }else{
             if(seqFlag){
-                client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(nodePath);
+                node = client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(nodePath);
 
             }else{
-                client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(nodePath);
+                node = client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(nodePath);
             }
         }
         logger.info("********[ZkNodeOps::createNode]===>>>end********");
+        return node;
     }
 
     /**
@@ -60,6 +61,43 @@ public class ZkNodeOps {
         childrenList = client.getChildren().forPath(nodePath);
         logger.info("********[ZkNodeOps::getZkNodeChildren]===>>>end********");
         return childrenList;
+    }
+
+    /**
+     * @desc 删除节点
+     * @param path
+     */
+    public void deleteNode(String path)throws Exception{
+        logger.info("********[ZkNodeOps::deleteNode]===>>>start********");
+        client.delete().guaranteed().deletingChildrenIfNeeded().forPath(path);
+        logger.info("********[ZkNodeOps::deleteNode]===>>>end********");
+    }
+
+    /**
+     * @desc 设置节点数据
+     * @param path 节点路径
+     * @param content 节点内容
+     */
+    public void setNodeData(String path,String content)throws Exception{
+        logger.info("********[ZkNodeOps::setNodeData]===>>>start********");
+        if(content == null){
+            return ;
+        }else{
+            client.setData().forPath(path,content.getBytes());
+        }
+        logger.info("********[ZkNodeOps::setNodeData]===>>>end********");
+    }
+
+    /**
+     * @desc 获取节点数据
+     * @param nodePath
+     * @return
+     */
+    public String getNodeData(String nodePath)throws Exception{
+        logger.info("********[ZkNodeOps::getNodeData]===>>>start********");
+        byte [] bytes = client.getData().forPath(nodePath);
+        logger.info("********[ZkNodeOps::getNodeData]===>>>end********");
+        return new String(bytes);
     }
 
 }

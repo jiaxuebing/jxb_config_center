@@ -1,4 +1,4 @@
-package com.jxb.demo.config;
+package com.jxb.demo.redis;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

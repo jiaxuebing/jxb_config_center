@@ -2,10 +2,13 @@
 <project version="4">
   <component name="Encoding" addBOMForNewFiles="with NO BOM">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/config-center-client" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/config-center-client" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/config-center-common" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/config-center-manager" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/config-center-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-data-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-data-worker" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-discom-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-dubbo-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-dubbo-provider-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-mq-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-mqtt-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-search-service" charset="UTF-8" />
   </component>
 </project>

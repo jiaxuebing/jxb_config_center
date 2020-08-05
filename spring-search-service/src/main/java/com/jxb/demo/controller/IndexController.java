@@ -1,13 +1,11 @@
 package com.jxb.demo.controller;
 
-import com.jxb.demo.index.ManageIndex;
-import org.elasticsearch.client.RestHighLevelClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @desc 索引及映射操作的controller
@@ -17,31 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020-04-05
  */
 @RestController
-@RequestMapping("/index")
+@RequestMapping("/device/data")
 public class IndexController {
 
     private static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
-    @Autowired
-    private RestHighLevelClient restHighLevelClient;
-
-    @Autowired
-    private ManageIndex manageIndex;
-
-    /**
-     * @desc 索引下添加mapping
-     * @return
-     */
-    @RequestMapping(value = "/putMapping",method = RequestMethod.GET)
-     public String putMapping(){
-        String result = null;
-        logger.info("======索引添加映射===[IndexController.putMapping]====start====");
-        manageIndex.createIndex("order_index_2");
-        manageIndex.putIndexMapping("order_index_2");
-        result = "putmaping is success";
-        logger.info("======索引添加映射===[IndexController.putMapping]====end====");
+    @RequestMapping(value = "/visit",method = RequestMethod.GET)
+    public Object testMirror(HttpServletRequest request){
+        Object result = "access data success";
+        String name = request.getParameter("name");
+        logger.info("####接收了数据：{}####",name);
         return result;
-     }
+    }
 
 
 }

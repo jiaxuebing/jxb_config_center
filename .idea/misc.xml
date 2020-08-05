@@ -4,11 +4,13 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/config-center-server/pom.xml" />
         <option value="$PROJECT_DIR$/config-center-common/pom.xml" />
         <option value="$PROJECT_DIR$/config-center-client/pom.xml" />
         <option value="$PROJECT_DIR$/config-center-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-es-service/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-data-web/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>

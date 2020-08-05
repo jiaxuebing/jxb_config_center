@@ -10,6 +10,9 @@
     <module>spring-mq-service</module>
     <module>spring-search-service</module>
     <module>spring-data-web</module>
+    <module>spring-dubbo-provider</module>
+    <module>spring-dubbo-provider-api</module>
+      <module>spring-mqtt-service</module>
   </modules>
 
   <parent>
@@ -44,6 +47,9 @@
     <druid.boot.version>1.1.22</druid.boot.version>
     <httpclient.version>4.5.11</httpclient.version>
     <javassist.version>3.27.0-GA</javassist.version>
+    <dubbo.version>2.7.6</dubbo.version>
+    <paho.version>1.2.5</paho.version>
+    <httpclient.version>4.5.12</httpclient.version>
   </properties>
 
   <dependencyManagement>
@@ -154,7 +160,31 @@
       <artifactId>javassist</artifactId>
       <version>${javassist.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
+    <dependency>
+      <groupId>org.apache.dubbo</groupId>
+      <artifactId>dubbo</artifactId>
+      <version>${dubbo.version}</version>
+    </dependency>
 
+    <dependency>
+      <groupId>com.jxb.demo</groupId>
+      <artifactId>spring-dubbo-provider-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.eclipse.paho/org.eclipse.paho.client.mqttv3 -->
+    <dependency>
+      <groupId>org.eclipse.paho</groupId>
+      <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+      <version>${paho.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
+    </dependency>
 
   </dependencies>
   </dependencyManagement>

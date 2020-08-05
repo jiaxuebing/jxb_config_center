@@ -4,6 +4,8 @@ import com.jxb.demo.zk.node.ZkNodeOps;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.recipes.cache.NodeCache;
+import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 
@@ -25,11 +27,32 @@ public class ZkTest {
             ZkNodeOps zkNodeOps = new ZkNodeOps(client);
             try{
                 //Thread.sleep(5000);
-                zkNodeOps.createNode("/jxb/nameService",true,false);
+                //zkNodeOps.createNode("/jxb/nameService/demo",true,false);
+                //zkNodeOps.deleteNode("/jxb/nameService/demo");
                 List<String> childrenList = zkNodeOps.getZkNodeChildren("/jxb");
                 for(String child:childrenList){
                     System.out.println("*****[child:"+child+"]****");
                 }
+                //zkNodeOps.setNodeData("/jxb/nameService","你好，中国我爱你");
+//                String nodeData = zkNodeOps.getNodeData("/jxb/nameService");
+//                System.out.println("+++++++[nodeData:"+nodeData+"]");
+                final NodeCache nodeCache = new NodeCache(client,"/jxb/application",false);
+                nodeCache.start();
+                nodeCache.getListenable().addListener(new NodeCacheListener() {
+                    @Override
+                    public void nodeChanged() throws Exception {
+                        byte[] bytes = nodeCache.getCurrentData().getData();
+                        if(bytes != null){
+                            System.out.println("/jxb/application****data:"+new String(bytes));
+                        }
+                    }
+                });
+                zkNodeOps.deleteNode("/jxb/application");
+                zkNodeOps.createNode("/jxb/application",true,false);
+                Thread.sleep(1000);
+                zkNodeOps.setNodeData("/jxb/application","我修改了一次");
+                Thread.sleep(1000);
+                zkNodeOps.setNodeData("/jxb/application","我修改了2次");
             }catch (Exception e){
                 e.printStackTrace();
 
