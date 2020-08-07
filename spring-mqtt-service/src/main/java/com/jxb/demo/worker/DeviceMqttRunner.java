@@ -13,21 +13,7 @@ public class DeviceMqttRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        deviceMqttHandler.connect();
-//        deviceMqttHandler.subscribe("device/#");
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                for(;;){
-//                    //WebSocketServer.broadCast(GenerateUtils.createSerialId());
-//                    try{
-//                        Thread.sleep(1000);
-//                    }catch (Exception e){
-//
-//                    }
-//                }
-//            }
-//        }).start();
-
+        deviceMqttHandler.connect();
+        //deviceMqttHandler.subscribe("device/#");
     }
 }

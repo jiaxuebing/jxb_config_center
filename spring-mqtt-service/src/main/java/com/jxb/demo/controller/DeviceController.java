@@ -5,16 +5,14 @@ import com.jxb.demo.constant.TimerConstant;
 import com.jxb.demo.entity.HttpBaseEntity;
 import com.jxb.demo.entity.HttpServiceResponse;
 import com.jxb.demo.entity.TimerEntity;
+import com.jxb.demo.entity.energy.EnergyEntity;
 import com.jxb.demo.http.HttpService;
 import com.jxb.demo.timer.TimerService;
 import com.jxb.demo.worker.FloatTaskFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -146,6 +144,5 @@ public class DeviceController {
         }
         return result;
     }
-
 
 }

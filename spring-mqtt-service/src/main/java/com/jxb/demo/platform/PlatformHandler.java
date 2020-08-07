@@ -4,6 +4,7 @@ import com.jxb.demo.mqtt.DeviceMqttHandler;
 import com.jxb.demo.mqtt.factory.DeviceMqttClientFactory;
 import com.jxb.demo.mqtt.factory.MqttConnectInfo;
 import com.jxb.demo.mqtt.handler.DeviceMqttHandlerImpl;
+import org.apache.commons.codec.binary.StringUtils;
 import org.eclipse.paho.client.mqttv3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +57,12 @@ public class PlatformHandler {
         mqttConnectOptions.setCleanSession(cleanSession);
         mqttConnectOptions.setKeepAliveInterval(keepAliveInternal);
         mqttConnectOptions.setConnectionTimeout(connectTimeout);
+        if(userName != null && userName.trim().length()>0){
+            mqttConnectOptions.setUserName(userName);
+        }
+        if(password != null && password.trim().length()>0){
+            mqttConnectOptions.setPassword(password.toCharArray());
+        }
         return new DeviceMqttHandlerImpl(mqttClient, mqttConnectOptions, new MqttCallback() {
             @Override
             public void connectionLost(Throwable cause) {

@@ -5,13 +5,16 @@ import com.jxb.demo.entity.HttpBaseEntity;
 import com.jxb.demo.entity.HttpServiceResponse;
 import com.jxb.demo.entity.TimerEntity;
 import com.jxb.demo.http.HttpService;
+import com.jxb.demo.mqtt.DeviceMqttHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +31,9 @@ public class FloatTaskFactory {
 
     @Resource
     private HttpService httpService;
+
+    @Resource
+    private DeviceMqttHandler deviceMqttHandler;
 
     private final Map<String,Class<? extends Runnable>> floatMap = new HashMap<>();
 
@@ -113,7 +119,18 @@ public class FloatTaskFactory {
             contentMap.put("type","6");
             httpBaseEntity.setContentMap(contentMap);
             HttpServiceResponse<String> response = httpService.doPost(httpBaseEntity);
-            logger.info("result:{}",JSONObject.toJSONString(response));
+            JSONObject jsonObject = JSONObject.parseObject(response.getData()).getJSONObject("obj").getJSONObject("data");
+            Map map = jsonObject.getInnerMap();
+            Map<String,Object> tbMap = new HashMap<>();
+            tbMap.put("ts",System.currentTimeMillis());
+            tbMap.put("values",map);
+            List<Map> mapList = new ArrayList<>();
+            mapList.add(tbMap);
+            Map<String,Object> dataMap = new HashMap<>();
+            dataMap.put("TIM0219114001",mapList);
+            deviceMqttHandler.publish("v1/gateway/telemetry",1,JSONObject.toJSONString(dataMap));
+            //logger.info("result:{}",JSONObject.toJSONString(response));
+            //logger.info("data-transfer:{}",JSONObject.toJSONString(dataMap));
         }
     }
 
